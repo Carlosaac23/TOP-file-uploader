@@ -8,7 +8,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch app.js"
+    "dev": "nodemon app.js",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "ejslint": "ejslint views"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.5.0",
@@ -24,6 +29,7 @@
     "pg": "^8.20.0"
   },
   "devDependencies": {
+    "nodemon": "^3.1.14",
     "oxfmt": "^0.40.0",
     "oxlint": "^1.55.0",
     "prisma": "^7.5.0"
