@@ -7,7 +7,6 @@ import { prisma } from '../lib/prisma.js';
 export async function verifyCallback(email, password, done) {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
-    console.log('User from passport config:', user);
 
     if (!user) {
       return done(null, false);
@@ -32,14 +31,12 @@ const strategy = new Strategy(
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {
-  console.log('serializeUser:', user);
   done(null, user.id);
 });
 
 passport.deserializeUser(async (userId, done) => {
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
-    console.log('deserializeUser:', user);
 
     if (!user) {
       return done(null, false);
