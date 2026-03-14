@@ -20,7 +20,8 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  files File[]
+  files   File[]
+  folders Folder[]
 
   @@map("users")
 }
@@ -39,7 +40,24 @@ model File {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
+  folderId String?
+  folder   Folder? @relation(fields: [folderId], references: [id])
+
   @@map("files")
+}
+
+model Folder {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  files File[]
+
+  @@map("folders")
 }
 
 model Session {
