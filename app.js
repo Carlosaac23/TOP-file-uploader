@@ -1,4 +1,6 @@
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 import express from 'express';
 import session from 'express-session';
 import methodOverride from 'method-override';
@@ -30,7 +32,7 @@ const ONE_DAY = 1000 * 60 * 60 * 24;
 app.use(
   session({
     cookie: { maxAge: ONE_DAY },
-    secret: 'hola',
+    secret: process.env.SECRET_WORD,
     resave: true,
     saveUninitialized: true,
     store: new PrismaSessionStore(prisma, {

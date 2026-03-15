@@ -14,7 +14,7 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "ejslint": "ejslint views",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.5.0",
