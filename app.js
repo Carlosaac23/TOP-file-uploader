@@ -8,6 +8,8 @@ import { fileURLToPath } from 'url';
 import './config/passport.js';
 import { prisma } from './lib/prisma.js';
 import { authRoutes } from './routes/authRoute.js';
+import { folderRoutes } from './routes/folderRoute.js';
+import { publicRoutes } from './routes/publicRoute.js';
 
 const app = express();
 const PORT = 8080;
@@ -40,7 +42,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/', publicRoutes);
 app.use('/', authRoutes);
+app.use('/folders', folderRoutes);
 
 function startServer() {
   try {
