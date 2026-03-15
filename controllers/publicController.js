@@ -14,6 +14,7 @@ export function getRegisterFormController(req, res) {
 export async function postRegisterController(req, res) {
   try {
     const { name, email, password } = req.body;
+
     await prisma.user.create({
       data: {
         name,
@@ -22,7 +23,6 @@ export async function postRegisterController(req, res) {
       },
     });
 
-    res.status(201).json({ msg: 'User registered successfully' });
     res.redirect('/login');
   } catch (error) {
     console.error(error);
