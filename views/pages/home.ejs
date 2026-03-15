@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>Welcome, <%= user.name %>!</h1>
+    <a href="/folders">Create a folder</a>
+    <a href="/logout">Logout</a>
+
+    <% if (folders.length) { %>
+      <% folders.forEach(folder => { %>
+        <a style="display: block;" href="/folders/<%= folder.id %>"><%= folder.name %></a>
+      <% }) %>
+    <% } else { %>
+      <p>You have no folders</p>
+    <% } %>
+  </body>
+</html>

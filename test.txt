@@ -1,0 +1,51 @@
+
+    <div id="fileInfo" style="display: none">
+      <p>Name: <span id="fileName"></span></p>
+      <p>Size: <span id="fileSize"></span></p>
+      <p>Type: <span id="fileType"></span></p>
+    </div>
+
+    <script>
+      document.getElementById("file").addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        document.getElementById("fileName").textContent = file.name;
+        document.getElementById("fileSize").textContent =
+          (file.size / 1024).toFixed(2) + " KB";
+        document.getElementById("fileType").textContent = file.type;
+        document.getElementById("fileInfo").style.display = "block";
+      });
+    </script>
+
+    app.use('/', publicRoutes);       // GET / (landing page, login, register)
+app.use('/', authRoutes);         // GET /home (user dashboard)
+app.use('/folders', folderRoutes); // CRUD folders
+app.use('/files', fileRoutes);    // CRUD files
+```
+
+Broken down:
+```
+PUBLIC
+GET  /               → landing page
+GET  /login          → login form
+POST /login          → authenticate
+GET  /register       → register form
+POST /register       → create account
+POST /logout         → logout
+
+PRIVATE
+GET  /home                        → user dashboard, lists folders + files
+
+FOLDERS
+GET    /folders                   → list all folders
+POST   /folders                   → create folder
+GET    /folders/:folderId         → view folder + its files
+PUT    /folders/:folderId         → rename folder
+DELETE /folders/:folderId         → delete folder
+POST   /folders/:folderId/upload  → upload file into folder
+
+FILES
+GET    /files/:fileId             → view file details
+DELETE /files/:fileId             → delete file
+PUT    /files/:fileId             → rename file
