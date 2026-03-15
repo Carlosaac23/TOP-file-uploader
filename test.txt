@@ -1,0 +1,19 @@
+
+    <div id="fileInfo" style="display: none">
+      <p>Name: <span id="fileName"></span></p>
+      <p>Size: <span id="fileSize"></span></p>
+      <p>Type: <span id="fileType"></span></p>
+    </div>
+
+    <script>
+      document.getElementById("file").addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        document.getElementById("fileName").textContent = file.name;
+        document.getElementById("fileSize").textContent =
+          (file.size / 1024).toFixed(2) + " KB";
+        document.getElementById("fileType").textContent = file.type;
+        document.getElementById("fileInfo").style.display = "block";
+      });
+    </script>
