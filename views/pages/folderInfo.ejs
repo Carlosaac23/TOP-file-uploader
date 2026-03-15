@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= folder.name %></title>
+  </head>
+  <body>
+    <h1><%= folder.name %></h1>
+    <a href="/folders/<%= folder.id %>/edit">Rename</a>
+    <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete</button>
+    </form>
+    <a href="/home">Back</a>
+  </body>
+</html>
