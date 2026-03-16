@@ -42,7 +42,7 @@ model File {
   user   User   @relation(fields: [userId], references: [id])
 
   folderId String?
-  folder   Folder? @relation(fields: [folderId], references: [id])
+  folder   Folder? @relation(fields: [folderId], references: [id], onDelete: Cascade)
 
   @@map("files")
 }
