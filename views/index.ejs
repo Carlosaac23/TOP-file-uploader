@@ -4,11 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Uploader</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles/main.css" />
   </head>
   <body>
-    <h1>Home</h1>
+    <div class="page">
+      <%- include('./partials/header.ejs') %>
 
-    <a href="register">Register</a>
-    <a href="login">Login</a>
+      <main class="hero">
+        <section>
+          <h1>Minimal storage for focused teams.</h1>
+          <p>
+            Upload, organize, and share files with a calm, neutral workspace.
+            Keep folders clean, permissions clear, and uploads fast.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/register">Get started</a>
+            <a class="button button-secondary" href="/login">Sign in</a>
+          </div>
+        </section>
+
+        <aside class="hero-panel">
+          <div class="panel-row">
+            <span>Active workspace</span>
+            <span>12 files</span>
+          </div>
+          <div class="panel-card">
+            <h3>Design archive</h3>
+            <p>4 folders, 9 collaborators</p>
+          </div>
+          <div class="panel-card">
+            <h3>Research notes</h3>
+            <p>Shared with product and ops</p>
+          </div>
+          <div class="panel-row">
+            <span>Uploads today</span>
+            <span>28 items</span>
+          </div>
+        </aside>
+      </main>
+
+      <section class="features">
+        <div class="feature-card">
+          <h4>Structured by default</h4>
+          <p>Start with sensible folder rules, then grow without clutter.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Secure access</h4>
+          <p>Invite only the people you need, with simple role controls.</p>
+        </div>
+        <div class="feature-card">
+          <h4>Fast retrieval</h4>
+          <p>Find the right file in seconds using clean, neutral filters.</p>
+        </div>
+      </section>
+
+      <%- include('./partials/footer.ejs') %>
+    </div>
   </body>
 </html>
