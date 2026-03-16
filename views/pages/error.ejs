@@ -6,9 +6,25 @@
     <title>Error Page</title>
 
     <link rel="shortcut icon" href="/images/folder.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/error.css" />
   </head>
   <body>
-    <h1>Error!</h1>
-    <p><%= msg %></p>
+    <div class="page page-error">
+      <%- include('../partials/header.ejs') %>
+
+      <main class="error-main">
+        <div class="error-card">
+          <h1>Something went wrong.</h1>
+          <p><%= msg %></p>
+          <div class="error-actions">
+            <a class="button button-primary" href="/">Go home</a>
+            <a class="button button-secondary" href="/login">Sign in</a>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+    </div>
   </body>
 </html>

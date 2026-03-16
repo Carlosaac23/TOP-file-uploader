@@ -1,0 +1,38 @@
+.page-error {
+  min-height: 100vh;
+}
+
+.error-main {
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.error-card {
+  width: min(720px, 100%);
+  background: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: 2.4rem;
+  padding: 3.2rem;
+  display: grid;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.error-card h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 3vw, 3.4rem);
+}
+
+.error-card p {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--neutral-600);
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

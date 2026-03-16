@@ -1,0 +1,201 @@
+.page-home {
+  min-height: 100vh;
+}
+
+.home-main {
+  flex: 1;
+  display: grid;
+  gap: 4rem;
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+
+.eyebrow {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--neutral-500);
+  margin: 0 0 1rem;
+}
+
+.home-hero h1 {
+  margin: 0 0 1.2rem;
+  font-size: clamp(2.8rem, 4vw, 4.2rem);
+}
+
+.home-hero p {
+  margin: 0 0 2rem;
+  color: var(--neutral-600);
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.home-summary {
+  background: var(--neutral-100);
+  border: 1px solid var(--neutral-200);
+  border-radius: 2.2rem;
+  padding: 2.4rem;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.create-folder-panel {
+  background: var(--neutral-100);
+  border: 1px solid var(--neutral-200);
+  border-radius: 2.2rem;
+  padding: 2.2rem;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.create-folder-panel .action-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+
+.create-folder-panel .folder-meta {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--neutral-500);
+}
+
+.create-folder-form {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.create-folder-form label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+
+.create-folder-form input[type='text'] {
+  width: 100%;
+  padding: 1.1rem 1.4rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--neutral-200);
+  background: var(--neutral-50);
+  font-size: 1.4rem;
+  color: var(--neutral-900);
+}
+
+.create-folder-form input[type='text']:focus {
+  outline: 2px solid var(--neutral-300);
+  border-color: transparent;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  color: var(--neutral-500);
+}
+
+.summary-card {
+  background: var(--neutral-50);
+  border-radius: 1.6rem;
+  padding: 1.6rem;
+  border: 1px solid var(--neutral-200);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.summary-card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.summary-card p {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--neutral-500);
+}
+
+.home-folders {
+  display: grid;
+  gap: 1.8rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.section-header span {
+  font-size: 1.3rem;
+  color: var(--neutral-500);
+}
+
+.folder-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+
+.folder-card {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.8rem;
+  border-radius: 1.8rem;
+  border: 1px solid var(--neutral-200);
+  background: var(--neutral-50);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+  flex: 1 1 240px;
+}
+
+.folder-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--neutral-300);
+}
+
+.folder-card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.folder-card p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--neutral-500);
+}
+
+.folder-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  opacity: 0.7;
+}
+
+.empty-state {
+  border: 1px dashed var(--neutral-300);
+  background: var(--neutral-100);
+}
+
+@media (max-width: 720px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
