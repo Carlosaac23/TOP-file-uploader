@@ -1,12 +1,24 @@
 <header class="nav">
-  <div class="brand">
-    <a href="/">
-      <div class="brand-mark">FU</div>
-      <span>File Uploader</span>
-    </a>
-  </div>
-  <nav class="nav-links">
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
-  </nav>
+  <% if (user) { %>
+    <div class="brand">
+      <a href="/home">
+        <div class="brand-mark">FU</div>
+        <span>File Uploader</span>
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="/logout">Logout</a>
+    </nav>
+  <% } else { %>
+    <div class="brand">
+      <a href="/">
+        <div class="brand-mark">FU</div>
+        <span>File Uploader</span>
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="/register">Register</a>
+      <a href="/login">Login</a>
+    </nav>
+  <% } %>
 </header>
