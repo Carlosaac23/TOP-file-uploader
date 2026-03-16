@@ -5,7 +5,6 @@ export async function getFileController(req, res) {
   try {
     const { fileId } = req.params;
     const file = await prisma.file.findUnique({ where: { id: fileId } });
-    console.log('Current file:', file);
 
     res.render('pages/fileInfo', { user: req.user, file });
   } catch (error) {
@@ -34,7 +33,6 @@ export async function deleteFileController(req, res) {
   try {
     const { fileId } = req.params;
     const file = await prisma.file.findUnique({ where: { id: fileId } });
-    console.log('File to delete:', file);
 
     if (!file || file.userId !== req.user.id) {
       return res.status(403).render('pages/error', { msg: 'Not allowed' });

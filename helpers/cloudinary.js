@@ -17,7 +17,5 @@ export function uploadToCloudinary(buffer) {
 }
 
 export async function deleteFromCloudinary(key, resourceType) {
-  const result = await cloudinary.uploader.destroy(key, { resource_type: resourceType });
-  console.log('Cloudinary delete result:', result);
-  return result;
+  return await cloudinary.uploader.destroy(key, { resource_type: resourceType });
 }

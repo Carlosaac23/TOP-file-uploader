@@ -27,7 +27,6 @@ export async function getFolderController(req, res) {
     const { folderId } = req.params;
     const folder = await prisma.folder.findUnique({ where: { id: folderId } });
     const files = await prisma.file.findMany({ where: { folderId } });
-    console.log('Files from this folder:', files);
 
     if (!folder) {
       return res.status(404).render('pages/error', { msg: 'Folder does not exist' });
