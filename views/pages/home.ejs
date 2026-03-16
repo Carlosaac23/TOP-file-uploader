@@ -10,12 +10,16 @@
     <a href="/folders">Create a folder</a>
     <a href="/logout">Logout</a>
 
-    <% if (folders.length) { %>
-      <% folders.forEach(folder => { %>
-        <a style="display: block;" href="/folders/<%= folder.id %>"><%= folder.name %></a>
-      <% }) %>
-    <% } else { %>
+    <div>
+      <h2>Folders</h2>
+
+      <% if (folders.length) { %>
+        <% folders.forEach(folder => { %>
+          <a style="display: block;" href="/folders/<%= folder.id %>"><%= folder.name %></a>
+        <% }) %>
+      <% } else { %>
       <p>You have no folders</p>
-    <% } %>
+      <% } %>
+    </div>
   </body>
 </html>
