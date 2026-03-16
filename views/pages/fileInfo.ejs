@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Info</title>
+
+    <!-- Scripts -->
+    <script src="/scripts/editFile.js" defer></script>
+  </head>
+  <body>
+    <h1><%= file.name %></h1>
+
+    <p><strong>File size:</strong> <%= (file.size / 1024).toFixed(2) %> KB</p>
+    <p>
+      <strong>Created:</strong> <%= file.createdAt.toLocaleString('en-US') %>
+    </p>
+    <p>
+      <strong>Edited:</strong> <%= file.updatedAt.toLocaleString('en-US') %>
+    </p>
+
+    <div style="display: flex; gap: 10px; align-items: center">
+      <button class="editBtn" type="button">Edit</button>
+      <form
+        id="deleteForm"
+        action="/files/<%= file.id %>?_method=DELETE"
+        method="POST"
+      >
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+
+    <div id="editFileForm" style="display: none; margin-top: 10px">
+      <form action="/files/<%= file.id %>?_method=PUT" method="POST">
+        <label for="name">File Name</label>
+        <input type="text" name="name" id="name" value="<%= file.name %>" />
+
+        <button type="submit">Save</button>
+      </form>
+    </div>
+
+    <a href="/folders/<%= file.folderId %>">Back</a>
+  </body>
+</html>
