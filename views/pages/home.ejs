@@ -6,22 +6,95 @@
     <title>Home</title>
 
     <link rel="shortcut icon" href="/images/folder.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/home.css" />
+
+    <script src="/scripts/createFolder.js" defer></script>
   </head>
   <body>
-    <h1>Welcome, <%= user.name %>!</h1>
-    <a href="/folders">Create a folder</a>
-    <a href="/logout">Logout</a>
+    <div class="page page-home">
+      <%- include('../partials/header.ejs') %>
 
-    <div>
-      <h2>Folders</h2>
+      <main class="home-main">
+        <section class="home-hero">
+          <div>
+            <p class="eyebrow">Workspace overview</p>
+            <h1>Welcome, <%= user.name %>.</h1>
+            <p>
+              Keep your folders tidy, share files safely, and move fast without
+              clutter.
+            </p>
+            <div class="home-actions">
+              <button class="button button-primary createFolder" type="button">Create a folder</button>
+              <a class="button button-secondary" href="/logout">Logout</a>
+            </div>
+          </div>
 
-      <% if (folders.length) { %>
-        <% folders.forEach(folder => { %>
-          <a style="display: block;" href="/folders/<%= folder.id %>"><%= folder.name %></a>
-        <% }) %>
-      <% } else { %>
-      <p>You have no folders</p>
-      <% } %>
+          <div id="createFolderForm" class="create-folder-panel" style="display: none;">
+            <div class="action-title">Create a new folder</div>
+            <p class="folder-meta">Keep everything organized in one focused place.</p>
+            <form class="create-folder-form" action="/home" method="POST">
+              <label for="name">Folder Name</label>
+              <input type="text" name="name" id="name" />
+
+              <button class="button button-primary" type="submit">Create</button>
+            </form>
+          </div>
+
+          <aside class="home-summary">
+            <div class="summary-row">
+              <span>Total folders</span>
+              <span><%= folders.length %></span>
+            </div>
+            <div class="summary-card">
+              <h3>Shared spaces</h3>
+              <p>Invite collaborators when you need them.</p>
+            </div>
+            <div class="summary-card">
+              <h3>Recent uploads</h3>
+              <p>Keep the latest files within easy reach.</p>
+            </div>
+            <div class="summary-row">
+              <span>Storage status</span>
+              <span>Healthy</span>
+            </div>
+          </aside>
+        </section>
+
+        <section class="home-folders">
+          <div class="section-header">
+            <h2>Your folders</h2>
+            <span>Access and organize your files</span>
+          </div>
+
+          <div class="folder-container">
+            <% if (folders.length) { %>
+              <% folders.forEach(folder => { %>
+                <a class="folder-card" href="/folders/<%= folder.id %>">
+                  <img
+                    class="folder-icon"
+                    src="/images/folder.svg"
+                    alt="Folder icon"
+                  />
+                  <h3><%= folder.name %></h3>
+                </a>
+              <% }) %>
+            <% } else { %>
+              <div class="folder-card empty-state">
+                <img
+                  class="folder-icon"
+                  src="/images/folder.svg"
+                  alt="Folder icon"
+                />
+                <h3>No folders yet</h3>
+                <p>Create a folder to start organizing your uploads.</p>
+              </div>
+            <% } %>
+          </div>
+        </section>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
     </div>
   </body>
 </html>

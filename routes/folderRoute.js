@@ -4,7 +4,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 import {
   getFoldersController,
-  createFolderController,
   getFolderController,
   putRenameFolderController,
   deleteFolderController,
@@ -14,7 +13,7 @@ import isAuth from '../middleware/auth.js';
 
 export const folderRoutes = Router();
 
-folderRoutes.route('/').get(isAuth, getFoldersController).post(isAuth, createFolderController);
+folderRoutes.get('/', isAuth, getFoldersController);
 folderRoutes
   .route('/:folderId')
   .get(isAuth, getFolderController)
