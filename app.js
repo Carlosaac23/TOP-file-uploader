@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import './config/passport.js';
 import { prisma } from './lib/prisma.js';
 import { authRoutes } from './routes/authRoute.js';
+import { fileRoutes } from './routes/fileRoute.js';
 import { folderRoutes } from './routes/folderRoute.js';
 import { publicRoutes } from './routes/publicRoute.js';
 
@@ -49,6 +50,7 @@ app.use(passport.session());
 app.use('/', publicRoutes);
 app.use('/', authRoutes);
 app.use('/folders', folderRoutes);
+app.use('/files', fileRoutes);
 
 function startServer() {
   try {

@@ -4,13 +4,143 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= folder.name %></title>
+
+    <!-- Scripts -->
+    <script src="/scripts/editFolder.js" defer></script>
+    <script src="/scripts/addFile.js" defer></script>
+
+    <link rel="shortcut icon" href="/images/folder.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/folderInfo.css" />
   </head>
   <body>
-    <h1><%= folder.name %></h1>
-    <a href="/folders/<%= folder.id %>/edit">Rename</a>
-    <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete</button>
-    </form>
-    <a href="/home">Back</a>
+    <div class="page page-folder">
+      <%- include('../partials/header.ejs') %>
+
+      <main class="folder-main">
+        <section class="folder-hero">
+          <div class="folder-title">
+            <img class="file-icon" src="/images/folder.svg" alt="Folder icon" />
+            <h1><%= folder.name %></h1>
+            <div class="folder-actions">
+              <button class="button button-secondary rename" type="button">
+                Rename
+              </button>
+              <form
+                id="deleteForm"
+                action="/folders/<%= folder.id %>?_method=DELETE"
+                method="POST"
+              >
+                <button class="button button-primary" type="submit">Delete</button>
+              </form>
+              <a class="button button-secondary" href="/home">Back</a>
+            </div>
+          </div>
+
+          <form
+            class="inline-form"
+            action="/folders/<%= folder.id %>?_method=PUT"
+            method="POST"
+            id="renameForm"
+            style="display: none"
+          >
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value="<%= folder.name %>"
+              placeholder="New folder name..."
+            />
+            <button class="button button-primary" type="submit">Rename</button>
+          </form>
+
+          <div class="folder-meta">
+            <span>Manage uploads and permissions for this folder.</span>
+          </div>
+        </section>
+
+        <section class="file-actions">
+          <div class="action-card">
+            <div class="action-title">Add a new file</div>
+            <p class="folder-meta">
+              Keep this folder up to date by uploading the latest assets.
+            </p>
+            <button class="button button-primary addFile" type="button">
+              Add file
+            </button>
+          </div>
+          <div class="action-card">
+            <div class="action-title">Selected file</div>
+            <div id="fileInfo" class="file-panel" style="display: none">
+              <p><strong>Name:</strong> <span id="fileName"></span></p>
+              <p><strong>Size:</strong> <span id="fileSize"></span></p>
+              <p><strong>Type:</strong> <span id="fileType"></span></p>
+            </div>
+            <p class="folder-meta">Choose a file to see quick details here.</p>
+          </div>
+        </section>
+
+        <div id="addFileForm" class="file-upload" style="display: none">
+          <div class="action-title">Upload to <%= folder.name %></div>
+          <p class="folder-meta">Accepted formats are limited by your admin.</p>
+          <form
+            action="/folders/<%= folder.id %>/upload"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <label for="file">File</label>
+            <input type="file" name="file" id="file" />
+            <button class="button button-primary" type="submit">Add</button>
+          </form>
+        </div>
+
+        <section class="home-folders">
+          <div class="section-header">
+            <h2>Files</h2>
+            <span>Review everything inside this folder</span>
+          </div>
+
+          <div class="file-grid">
+            <% if (files.length) { %>
+              <% files.forEach(file => { %>
+                <div class="file-card">
+                  <img
+                    class="file-icon"
+                    src="/images/folder.svg"
+                    alt="Folder icon"
+                  />
+                  <h3><%= file.name %></h3>
+                  <p>
+                    <strong>File size:</strong> <%= (file.size / 1024).toFixed(2) %>
+                    KB
+                  </p>
+                  <p>
+                    <strong>Created:</strong>
+                    <%= file.createdAt.toLocaleString('en-US') %>
+                  </p>
+                  <p>
+                    <strong>Updated:</strong>
+                    <%= file.updatedAt.toLocaleString('en-US') %>
+                  </p>
+                  <a class="auth-link" href="/files/<%= file.id %>">More info</a>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <div class="file-card empty-state">
+                <img
+                  class="file-icon"
+                  src="/images/folder.svg"
+                  alt="Folder icon"
+                />
+                <h3>You have no files</h3>
+                <p>Add a file to start tracking uploads.</p>
+              </div>
+            <% } %>
+          </div>
+        </section>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+    </div>
   </body>
 </html>

@@ -4,20 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/login.css" />
+    <link rel="shortcut icon" href="/images/folder.svg" type="image/x-icon" />
   </head>
   <body>
-    <h1>Login</h1>
+    <div class="page page-auth">
+      <%- include('../partials/header.ejs') %>
 
-    <form action="/login" method="POST">
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" />
+      <main class="auth-main">
+        <div class="auth-card">
+          <section class="auth-panel">
+            <h1>Welcome back.</h1>
+            <p>
+              Access a calm, neutral workspace for uploads and shared folders.
+            </p>
+            <div class="meta">
+              <span>Secure sessions</span>
+              <span>Neutral, focused UI</span>
+              <span>Fast file retrieval</span>
+            </div>
+          </section>
 
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
+          <form class="auth-form" action="/login" method="POST">
+            <div>
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required />
+            </div>
 
-      <button type="submit">Login</button>
+            <div>
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" required />
+            </div>
 
-      <a href="/register">Register</a>
-    </form>
+            <div class="auth-actions">
+              <button class="auth-button" type="submit">Login</button>
+              <a class="auth-link" href="/register"
+                >Need an account? Register</a
+              >
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+    </div>
   </body>
 </html>

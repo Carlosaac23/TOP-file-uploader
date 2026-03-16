@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Info</title>
+
+    <!-- Scripts -->
+    <script src="/scripts/editFile.js" defer></script>
+
+    <link rel="shortcut icon" href="/images/folder.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/fileInfo.css" />
+  </head>
+  <body>
+    <div class="page page-file">
+      <%- include('../partials/header.ejs') %>
+
+      <main class="file-main">
+        <section class="file-hero">
+          <div class="file-title">
+            <img class="file-icon" src="/images/folder.svg" alt="File icon" />
+            <h1><%= file.name %></h1>
+          </div>
+
+          <div class="file-meta">
+            <p>
+              <strong>File size:</strong> <%= (file.size / 1024).toFixed(2) %> KB
+            </p>
+            <p>
+              <strong>Created:</strong>
+              <%= file.createdAt.toLocaleString('en-US') %>
+            </p>
+            <p>
+              <strong>Edited:</strong>
+              <%= file.updatedAt.toLocaleString('en-US') %>
+            </p>
+          </div>
+
+          <div class="file-actions">
+            <button class="button button-secondary editBtn" type="button">
+              Edit
+            </button>
+            <form
+              id="deleteForm"
+              action="/files/<%= file.id %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="button button-primary" type="submit">Delete</button>
+            </form>
+            <a class="auth-link" href="/folders/<%= file.folderId %>">Back</a>
+          </div>
+        </section>
+
+        <div id="editFileForm" class="edit-panel" style="display: none">
+          <div class="action-title">Rename file</div>
+          <form action="/files/<%= file.id %>?_method=PUT" method="POST">
+            <label for="name">File Name</label>
+            <input type="text" name="name" id="name" value="<%= file.name %>" />
+
+            <button class="button button-primary" type="submit">Save</button>
+          </form>
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+    </div>
+  </body>
+</html>

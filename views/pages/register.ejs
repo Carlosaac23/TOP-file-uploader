@@ -4,23 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/register.css" />
+    <link rel="shortcut icon" href="/images/folder.svg" type="image/x-icon" />
   </head>
   <body>
-    <h1>Register</h1>
+    <div class="page page-auth">
+      <%- include('../partials/header.ejs') %>
 
-    <form action="/register" method="POST">
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" />
+      <main class="auth-main">
+        <div class="auth-card">
+          <section class="auth-panel">
+            <h1>Create your workspace.</h1>
+            <p>Start a neutral, minimal file hub for your team in minutes.</p>
+            <div class="meta">
+              <span>Invite collaborators</span>
+              <span>Organize folders quickly</span>
+              <span>Keep files accessible</span>
+              <% if (todayUsers === 1) { %>
+                <span><%= todayUsers %> user registered today</span>
+              <% } else { %>
+                <span><%= todayUsers %> users registered today</span>
+              <% } %>
+            </div>
+          </section>
 
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" />
+          <form class="auth-form" action="/register" method="POST">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" required />
+            </div>
 
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
+            <div>
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required />
+            </div>
 
-      <button type="submit">Register</button>
+            <div>
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" required />
+            </div>
 
-      <a href="/">Back</a>
-    </form>
+            <div class="auth-actions">
+              <button class="auth-button" type="submit">Register</button>
+              <a class="auth-link" href="/login"
+                >Already have an account? Log In</a
+              >
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+    </div>
   </body>
 </html>
