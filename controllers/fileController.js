@@ -7,7 +7,7 @@ export async function getFileController(req, res) {
     const file = await prisma.file.findUnique({ where: { id: fileId } });
     console.log('Current file:', file);
 
-    res.render('pages/fileInfo', { file });
+    res.render('pages/fileInfo', { user: req.user, file });
   } catch (error) {
     console.error(error);
   }

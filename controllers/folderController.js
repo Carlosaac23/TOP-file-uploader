@@ -33,7 +33,7 @@ export async function getFolderController(req, res) {
       return res.status(404).render('pages/error', { msg: 'Folder does not exist' });
     }
 
-    res.render('pages/folderInfo', { folder, files });
+    res.render('pages/folderInfo', { user: req.user, folder, files });
   } catch (error) {
     console.error(error);
   }
