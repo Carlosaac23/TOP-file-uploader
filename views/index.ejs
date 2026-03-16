@@ -29,11 +29,11 @@
         <aside class="hero-panel">
           <div class="panel-row">
             <span>Active workspace</span>
-            <span>12 files</span>
+            <span><%= files %> files</span>
           </div>
           <div class="panel-card">
             <h3>Design archive</h3>
-            <p>4 folders, 9 collaborators</p>
+            <p><%= folders %> folders, <%= users %> collaborators</p>
           </div>
           <div class="panel-card">
             <h3>Research notes</h3>
@@ -41,7 +41,7 @@
           </div>
           <div class="panel-row">
             <span>Uploads today</span>
-            <span>28 items</span>
+            <span><%= todayFiles %> items</span>
           </div>
         </aside>
       </main>

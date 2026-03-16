@@ -3,8 +3,26 @@ import passport from 'passport';
 import { generateHashedPassword } from '../helpers/passwords.js';
 import { prisma } from '../lib/prisma.js';
 
-export function getIndexController(req, res) {
-  res.render('index');
+export async function getIndexController(req, res) {
+  try {
+    const users = (await prisma.user.findMany()).length;
+    const folders = (await prisma.folder.findMany()).length;
+    const files = (await prisma.file.findMany()).length;
+
+    // Files uploaded today
+    const today = new Date();
+    const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    const todayFiles = (
+      await prisma.file.findMany({
+        where: { createdAt: { gte: startOfDay, lt: endOfDay } },
+      })
+    ).length;
+
+    res.render('index', { users, folders, files, todayFiles });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export function getRegisterFormController(req, res) {
