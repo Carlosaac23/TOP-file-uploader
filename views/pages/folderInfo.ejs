@@ -4,13 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= folder.name %></title>
+
+    <!-- Scripts -->
+    <script src="/scripts/editFolder.js" defer></script>
+    <script src="/scripts/addFile.js" defer></script>
   </head>
   <body>
-    <h1><%= folder.name %></h1>
-    <a href="/folders/<%= folder.id %>/edit">Rename</a>
-    <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST">
+    <div style="display: flex; gap: 10px; align-items: center">
+      <h1><%= folder.name %></h1>
+      <button class="rename" type="button">Rename</button>
+
+      <form
+        style="display: none"
+        action="/folders/<%= folder.id %>?_method=PUT"
+        method="POST"
+        id="renameForm"
+      >
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="<%= folder.name %>"
+          placeholder="New folder name..."
+        />
+
+        <button type="submit">Rename</button>
+      </form>
+    </div>
+
+    <form id="deleteForm" action="/folders/<%= folder.id %>?_method=DELETE" method="POST">
       <button type="submit">Delete</button>
     </form>
+
     <a href="/home">Back</a>
+
+    <button class="addFile" type="button">Add file</button>
+
+    <div id="addFileForm" style="display: none">
+      <form
+        action="/folders/<%= folder.id %>/upload"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <label for="file">File</label>
+        <input type="file" name="file" id="file" />
+
+        <button type="submit">Add</button>
+      </form>
+    </div>
+
+    <div id="fileInfo" style="display: none">
+      <p>Name: <span id="fileName"></span></p>
+      <p>Size: <span id="fileSize"></span></p>
+      <p>Type: <span id="fileType"></span></p>
+    </div>
+
+    <div>
+      <h2>Files</h2>
+
+      <% if (files.length) { %>
+        <% files.forEach(file => { %>
+          <div style="border: 1px solid black; border-radius: 6px; padding: 6px">
+            <p><strong>File name:</strong> <%= file.name %></p>
+            <p><strong>File size:</strong> <%= (file.size / 1024).toFixed(2) %> KB</p>
+            <p><strong>Created:</strong> <%= file.createdAt.toLocaleString('en-US') %></p>
+            <p><strong>Updated:</strong> <%= file.updatedAt.toLocaleString('en-US') %></p>
+
+            <a href="/files/<%= file.id %>">More info</a>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>You have no files</p>
+      <% } %>
+    </div>
   </body>
 </html>
