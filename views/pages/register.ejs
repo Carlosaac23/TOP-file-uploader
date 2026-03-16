@@ -22,6 +22,11 @@
               <span>Invite collaborators</span>
               <span>Organize folders quickly</span>
               <span>Keep files accessible</span>
+              <% if (todayUsers === 1) { %>
+                <span><%= todayUsers %> user registered today</span>
+              <% } else { %>
+                <span><%= todayUsers %> users registered today</span>
+              <% } %>
             </div>
           </section>
 

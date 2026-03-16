@@ -19,14 +19,27 @@ export async function getIndexController(req, res) {
       })
     ).length;
 
-    res.render('index', { users, folders, files, todayFiles });
+    res.render('index', { user: req.user, users, folders, files, todayFiles });
   } catch (error) {
     console.error(error);
   }
 }
 
-export function getRegisterFormController(req, res) {
-  res.render('pages/register');
+export async function getRegisterFormController(req, res) {
+  try {
+    const today = new Date();
+    const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    const todayUsers = (
+      await prisma.user.findMany({
+        where: { createdAt: { gte: startOfDay, lt: endOfDay } },
+      })
+    ).length;
+
+    res.render('pages/register', { user: req.user, todayUsers });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function postRegisterController(req, res) {
@@ -48,7 +61,7 @@ export async function postRegisterController(req, res) {
 }
 
 export function getLoginFormController(req, res) {
-  res.render('pages/login');
+  res.render('pages/login', { user: req.user });
 }
 
 export const postLoginController = passport.authenticate('local', {
