@@ -1,4 +1,4 @@
-import { uploadToCloudinary } from '../helpers/cloudinary.js';
+import { uploadToCloudinary, deleteFromCloudinary } from '../helpers/cloudinary.js';
 import { prisma } from '../lib/prisma.js';
 
 export function getFoldersController(req, res) {
@@ -62,6 +62,12 @@ export async function deleteFolderController(req, res) {
 
     if (!folder || folder.userId !== req.user.id) {
       return res.status(403).render('pages/error', { msg: 'Not allowed' });
+    }
+
+    const files = await prisma.file.findMany({ where: { folderId } });
+
+    for (const file of files) {
+      deleteFromCloudinary(file.key, file.resourceType);
     }
 
     await prisma.folder.delete({ where: { id: folderId } });
