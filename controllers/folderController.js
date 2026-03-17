@@ -67,8 +67,7 @@ export async function deleteFolderController(req, res) {
     const files = await prisma.file.findMany({ where: { folderId } });
 
     for (const file of files) {
-      console.log('file to delete:', file);
-      deleteFromSupabase(file.key);
+      await deleteFromSupabase(file.key);
     }
 
     await prisma.folder.delete({ where: { id: folderId } });
@@ -88,9 +87,7 @@ export async function postUploadToFolderController(req, res) {
       return res.status(403).render('pages/error', { msg: 'Not allowed' });
     }
 
-    console.log('The file:', req.file);
     const result = await uploadToSupabase(req.file, req.file.buffer);
-    console.log('file uploaded:', result);
     const { url, key } = result;
 
     await prisma.file.create({
@@ -124,7 +121,7 @@ export async function shareFolderController(req, res) {
     const files = await prisma.file.findMany({ where: { folderId } });
     const keys = files.map(file => file.key);
     const signedURLs = await createSignedURLs(keys);
-    console.log(signedURLs);
+
     res.render('pages/signedUrls', { user: req.user, links: signedURLs, folderId });
   } catch (error) {
     console.error(error);
