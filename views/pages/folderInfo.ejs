@@ -20,20 +20,28 @@
       <main class="folder-main">
         <section class="folder-hero">
           <div class="folder-title">
-            <img class="file-icon" src="/images/folder.svg" alt="Folder icon" />
-            <h1><%= folder.name %></h1>
-            <div class="folder-actions">
-              <button class="button button-secondary rename" type="button">
-                Rename
-              </button>
-              <form
-                id="deleteForm"
-                action="/folders/<%= folder.id %>?_method=DELETE"
-                method="POST"
-              >
-                <button class="button button-primary" type="submit">Delete</button>
+            <div>
+              <img class="file-icon" src="/images/folder.svg" alt="Folder icon" />
+              <h1><%= folder.name %></h1>
+              <div class="folder-actions">
+                <button class="button button-secondary rename" type="button">
+                  Rename
+                </button>
+                <form
+                  id="deleteForm"
+                  action="/folders/<%= folder.id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button class="button button-primary" type="submit">Delete</button>
+                </form>
+                <a class="button button-secondary" href="/home">Back</a>
+              </div>
+            </div>
+            <div>
+              <form action="/folders/<%= folder.id %>/share">
+                <button class="button button-primary" type="submit">Share Folder</button>
+
               </form>
-              <a class="button button-secondary" href="/home">Back</a>
             </div>
           </div>
 

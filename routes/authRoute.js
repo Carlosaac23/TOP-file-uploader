@@ -6,5 +6,4 @@ import isAuth from '../middleware/auth.js';
 
 export const authRoutes = Router();
 
-authRoutes.get('/home', getUserHomeController);
-authRoutes.route('/home').get(getUserHomeController).post(isAuth, createFolderController);
+authRoutes.route('/home').get(isAuth, getUserHomeController).post(isAuth, createFolderController);

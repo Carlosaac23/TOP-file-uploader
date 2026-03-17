@@ -8,6 +8,7 @@ import {
   putRenameFolderController,
   deleteFolderController,
   postUploadToFolderController,
+  shareFolderController,
 } from '../controllers/folderController.js';
 import isAuth from '../middleware/auth.js';
 
@@ -20,3 +21,4 @@ folderRoutes
   .put(isAuth, putRenameFolderController)
   .delete(isAuth, deleteFolderController);
 folderRoutes.post('/:folderId/upload', isAuth, upload.single('file'), postUploadToFolderController);
+folderRoutes.get('/:folderId/share', isAuth, shareFolderController);

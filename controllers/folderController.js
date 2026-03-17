@@ -1,4 +1,4 @@
-import { uploadToCloudinary } from '../helpers/cloudinary.js';
+import { uploadToSupabase, deleteFromSupabase, createSignedURLs } from '../helpers/supabase.js';
 import { prisma } from '../lib/prisma.js';
 
 export function getFoldersController(req, res) {
@@ -64,6 +64,13 @@ export async function deleteFolderController(req, res) {
       return res.status(403).render('pages/error', { msg: 'Not allowed' });
     }
 
+    const files = await prisma.file.findMany({ where: { folderId } });
+
+    for (const file of files) {
+      console.log('file to delete:', file);
+      deleteFromSupabase(file.key);
+    }
+
     await prisma.folder.delete({ where: { id: folderId } });
 
     res.redirect('/home');
@@ -81,11 +88,10 @@ export async function postUploadToFolderController(req, res) {
       return res.status(403).render('pages/error', { msg: 'Not allowed' });
     }
 
-    const {
-      secure_url: url,
-      public_id: key,
-      resource_type,
-    } = await uploadToCloudinary(req.file.buffer);
+    console.log('The file:', req.file);
+    const result = await uploadToSupabase(req.file, req.file.buffer);
+    console.log('file uploaded:', result);
+    const { url, key } = result;
 
     await prisma.file.create({
       data: {
@@ -95,13 +101,31 @@ export async function postUploadToFolderController(req, res) {
         size: req.file.size,
         url,
         key,
-        resourceType: resource_type,
         userId: req.user.id,
         folderId,
       },
     });
 
     res.redirect(`/folders/${folderId}`);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function shareFolderController(req, res) {
+  try {
+    const { folderId } = req.params;
+    const folder = await prisma.folder.findUnique({ where: { id: folderId } });
+
+    if (!folder || folder.userId !== req.user.id) {
+      return res.status(403).render('pages/error', { msg: 'Not allowed' });
+    }
+
+    const files = await prisma.file.findMany({ where: { folderId } });
+    const keys = files.map(file => file.key);
+    const signedURLs = await createSignedURLs(keys);
+    console.log(signedURLs);
+    res.render('pages/signedUrls', { user: req.user, links: signedURLs, folderId });
   } catch (error) {
     console.error(error);
   }
