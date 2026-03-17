@@ -68,7 +68,7 @@ export async function deleteFolderController(req, res) {
 
     for (const file of files) {
       console.log('file to delete:', file);
-      deleteFromSupabase(file.key);
+      await deleteFromSupabase(file.key);
     }
 
     await prisma.folder.delete({ where: { id: folderId } });
