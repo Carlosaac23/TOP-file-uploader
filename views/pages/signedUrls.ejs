@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Links</title>
+
+    <link rel="shortcut icon" href="/images/folder.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/signedUrls.css" />
+  </head>
+  <body>
+    <div class="page page-links">
+      <%- include('../partials/header.ejs') %>
+
+      <main class="links-main">
+        <section class="links-hero">
+          <div>
+            <p class="eyebrow">Share links</p>
+            <h1>Your secure download links</h1>
+            <p>
+              Each link is valid for 24 hours. Share them with people you trust
+              and keep control of access.
+            </p>
+            <div class="links-actions">
+              <a class="button button-secondary" href="/folders/<%= folderId %>">Back</a>
+            </div>
+          </div>
+
+          <aside class="links-panel">
+            <div class="panel-row">
+              <span>Total links</span>
+              <span><%= links ? links.length : 0 %></span>
+            </div>
+            <div class="panel-card">
+              <h3>Share safely</h3>
+              <p>Send links individually to keep distribution clear.</p>
+            </div>
+            <div class="panel-card">
+              <h3>Auto-expire</h3>
+              <p>Every link stops working after 24 hours.</p>
+            </div>
+            <div class="panel-row">
+              <span>Visibility</span>
+              <span>Private</span>
+            </div>
+          </aside>
+        </section>
+
+        <section class="links-section">
+          <div class="section-header">
+            <h2>Links ready to share</h2>
+            <span>Opens in a new tab</span>
+          </div>
+
+          <div class="links-grid">
+            <% if (links && links.length) { %>
+              <% links.forEach(link => { %>
+                <div class="link-card">
+                  <div class="link-info">
+                    <h3 class="link-name"><%= link.path %></h3>
+                    <span class="link-expiry">Expires in 24 hours</span>
+                  </div>
+                  <a
+                    class="button button-primary"
+                    href="<%= link.signedUrl %>"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Open link
+                  </a>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <div class="link-card empty-state">
+                <div>
+                  <h3>No links yet</h3>
+                  <p>Share a folder to generate secure links.</p>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </section>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+    </div>
+  </body>
+</html>

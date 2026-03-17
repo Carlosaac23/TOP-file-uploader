@@ -1,0 +1,135 @@
+.page-links {
+  min-height: 100vh;
+}
+
+.links-main {
+  flex: 1;
+  display: grid;
+  gap: 3.6rem;
+}
+
+.links-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+
+.eyebrow {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--neutral-500);
+  margin: 0 0 1rem;
+}
+
+.links-hero h1 {
+  margin: 0 0 1.2rem;
+  font-size: clamp(2.8rem, 4vw, 4.2rem);
+}
+
+.links-hero p {
+  margin: 0 0 2rem;
+  color: var(--neutral-600);
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.links-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.links-panel {
+  background: var(--neutral-100);
+  border: 1px solid var(--neutral-200);
+  border-radius: 2.2rem;
+  padding: 2.2rem;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.links-section {
+  display: grid;
+  gap: 1.8rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.section-header span {
+  font-size: 1.3rem;
+  color: var(--neutral-500);
+}
+
+.links-grid {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.link-card {
+  background: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: 1.8rem;
+  padding: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.link-info {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.link-name {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  word-break: break-word;
+}
+
+.link-expiry {
+  font-size: 1.2rem;
+  color: var(--neutral-500);
+}
+
+.link-card .button {
+  white-space: nowrap;
+}
+
+.link-card.empty-state {
+  border: 1px dashed var(--neutral-300);
+  background: var(--neutral-100);
+}
+
+.link-card.empty-state h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.6rem;
+}
+
+.link-card.empty-state p {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--neutral-500);
+}
+
+@media (max-width: 720px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
