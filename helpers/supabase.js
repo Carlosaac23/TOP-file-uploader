@@ -36,7 +36,6 @@ export async function downloadFromSupabase(key) {
     throw error;
   }
 
-  console.log('Data from downloading:', data);
   return data;
 }
 
