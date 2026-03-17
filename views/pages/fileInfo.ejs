@@ -21,11 +21,17 @@
           <div class="file-title">
             <img class="file-icon" src="/images/folder.svg" alt="File icon" />
             <h1><%= file.name %></h1>
+            <form action="/files/<%= file.id %>/download">
+              <button class="button button-primary" type="submit">
+                Download
+              </button>
+            </form>
           </div>
 
           <div class="file-meta">
             <p>
-              <strong>File size:</strong> <%= (file.size / 1024).toFixed(2) %> KB
+              <strong>File size:</strong> <%= (file.size / 1024).toFixed(2) %>
+              KB
             </p>
             <p>
               <strong>Created:</strong>
@@ -46,7 +52,9 @@
               action="/files/<%= file.id %>?_method=DELETE"
               method="POST"
             >
-              <button class="button button-primary" type="submit">Delete</button>
+              <button class="button button-primary" type="submit">
+                Delete
+              </button>
             </form>
             <a class="auth-link" href="/folders/<%= file.folderId %>">Back</a>
           </div>
