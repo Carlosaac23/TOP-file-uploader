@@ -1,6 +1,6 @@
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
+import { configDotenv } from 'dotenv';
+configDotenv({ path: '.env.local' });
 import express from 'express';
 import session from 'express-session';
 import methodOverride from 'method-override';
